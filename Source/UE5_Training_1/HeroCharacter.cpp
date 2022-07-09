@@ -19,14 +19,15 @@ AHeroCharacter::AHeroCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	SpringArm->TargetArmLength = 300.f;
-	SpringArm->SetRelativeRotation(FRotator(-35.f, 0.f, 0.f));
+	SpringArm->SetRelativeLocation(FVector(30.f, 0.f, 60.f));
+	SpringArm->SetRelativeRotation(FRotator(-10.f, 0.f, 0.f));
 
 
 	//To position the mesh on the ground looking forward
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -88.f), FRotator(0.f, -90.f, 0.f));
 
 
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SM(TEXT("SkeletalMesh'/Game/ParagonYin/Characters/Heroes/Yin/Meshes/Yin.Yin'"));
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SM(TEXT("SkeletalMesh'/Game/ParagonSerath/Characters/Heroes/Serath/Meshes/Serath.Serath'"));
 	
 	if (SM.Succeeded()) 
 	{
