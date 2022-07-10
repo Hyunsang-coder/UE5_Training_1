@@ -39,7 +39,7 @@ public:
 		PlayerInputComponent->BindAxis("Strafe", this, &AHeroCharacter::Strafe);
 		PlayerInputComponent->BindAxis("Yaw", this, &AHeroCharacter::Yaw);
 
-		// 강의에 없었지만 카메라 위아래 움직임 추가 +BP에서 InheritPitch 체크! 
+		// 카메라 위아래 움직임 추가 +BP에서 UsePawnControl Rotation + InheritPitch 체크! 
 		PlayerInputComponent->BindAxis("LookUp", this, &AHeroCharacter::AddControllerPitchInput);
 	}
 
