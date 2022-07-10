@@ -19,6 +19,7 @@ AHeroCharacter::AHeroCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	SpringArm->TargetArmLength = 300.f;
+	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->SetRelativeLocation(FVector(30.f, 0.f, 60.f));
 	SpringArm->SetRelativeRotation(FRotator(-10.f, 0.f, 0.f));
 
@@ -47,22 +48,6 @@ void AHeroCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
-
-// Called to bind functionality to input
-void AHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AHeroCharacter::Jump);
-	PlayerInputComponent->BindAxis("MoveForward", this, &AHeroCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("Strafe", this, &AHeroCharacter::Strafe);
-	PlayerInputComponent->BindAxis("Yaw", this, &AHeroCharacter::Yaw);
-}
-
-void AHeroCharacter::Jump()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Jump!"));
 }
 
 void AHeroCharacter::MoveForward(float Value)

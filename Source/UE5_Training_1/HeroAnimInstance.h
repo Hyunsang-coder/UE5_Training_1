@@ -14,7 +14,13 @@ class UE5_TRAINING_1_API UHeroAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 
-private:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Meta=(AllowPrivateAccess=true))
-	float speed;
+	virtual void NativeUpdateAnimation(float DeltaSecond) override;
+
+
+private: 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Pawn, Meta = (AllowPrivateAccess = true))
+	float Speed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+	bool IsFalling;
 };
