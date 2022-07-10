@@ -19,6 +19,7 @@ AHeroCharacter::AHeroCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	SpringArm->TargetArmLength = 300.f;
+	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->SetRelativeLocation(FVector(30.f, 0.f, 60.f));
 	SpringArm->SetRelativeRotation(FRotator(-10.f, 0.f, 0.f));
 

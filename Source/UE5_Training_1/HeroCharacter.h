@@ -22,12 +22,12 @@ protected:
 	void MoveForward(float Value);
 	void Strafe(float Value);
 	void Yaw(float Value);
+	void Pitch(float Value);
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override
 	{
@@ -38,6 +38,9 @@ public:
 		PlayerInputComponent->BindAxis("MoveForward", this, &AHeroCharacter::MoveForward);
 		PlayerInputComponent->BindAxis("Strafe", this, &AHeroCharacter::Strafe);
 		PlayerInputComponent->BindAxis("Yaw", this, &AHeroCharacter::Yaw);
+
+		// 강의에 없었지만 카메라 위아래 움직임 추가 +BP에서 InheritPitch 체크! 
+		PlayerInputComponent->BindAxis("LookUp", this, &AHeroCharacter::AddControllerPitchInput);
 	}
 
 
