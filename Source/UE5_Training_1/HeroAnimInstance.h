@@ -20,4 +20,7 @@ class UE5_TRAINING_1_API UHeroAnimInstance : public UAnimInstance
 private: 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Pawn, Meta = (AllowPrivateAccess = true))
 	float Speed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+	bool IsFalling;
 };

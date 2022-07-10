@@ -19,7 +19,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void Jump();
 	void MoveForward(float Value);
 	void Strafe(float Value);
 	void Yaw(float Value);
@@ -29,7 +28,17 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override
+	{
+		Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+		//Jump는 내장함수
+		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AHeroCharacter::Jump);
+		PlayerInputComponent->BindAxis("MoveForward", this, &AHeroCharacter::MoveForward);
+		PlayerInputComponent->BindAxis("Strafe", this, &AHeroCharacter::Strafe);
+		PlayerInputComponent->BindAxis("Yaw", this, &AHeroCharacter::Yaw);
+	}
 
 
 private:

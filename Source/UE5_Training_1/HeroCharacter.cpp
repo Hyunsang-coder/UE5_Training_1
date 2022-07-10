@@ -49,22 +49,6 @@ void AHeroCharacter::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void AHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AHeroCharacter::Jump);
-	PlayerInputComponent->BindAxis("MoveForward", this, &AHeroCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("Strafe", this, &AHeroCharacter::Strafe);
-	PlayerInputComponent->BindAxis("Yaw", this, &AHeroCharacter::Yaw);
-}
-
-void AHeroCharacter::Jump()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Jump!"));
-}
-
 void AHeroCharacter::MoveForward(float Value)
 {
 	//Get the forward direction of the actor then add the input value 

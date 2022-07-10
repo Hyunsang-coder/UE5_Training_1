@@ -2,6 +2,8 @@
 
 
 #include "HeroAnimInstance.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/PawnMovementComponent.h"
 
 void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
@@ -11,6 +13,14 @@ void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	if (IsValid(pawn)) 
 	{
 		Speed = pawn->GetVelocity().Size();
+
+		auto Character = Cast<ACharacter>(pawn);
+		if (Character) 
+		{
+			IsFalling = Character->GetMovementComponent()->IsFalling();
+		}
 	}
+
+
 
 }
