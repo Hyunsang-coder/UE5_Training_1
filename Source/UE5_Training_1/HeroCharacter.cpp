@@ -41,6 +41,9 @@ AHeroCharacter::AHeroCharacter()
 void AHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AnimInstance = Cast<UHeroAnimInstance>(GetMesh()->GetAnimInstance());
+	AnimInstance->OnMontageEnded.AddDynamic(this, &AHeroCharacter::OnAttackMontageEnded);
 	
 }
 
@@ -49,6 +52,11 @@ void AHeroCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AHeroCharacter::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+	IsAttacking = false;
 }
 
 void AHeroCharacter::MoveForward(float Value)
@@ -71,10 +79,9 @@ void AHeroCharacter::Yaw(float Value)
 
 void AHeroCharacter::Attack()
 {
-	auto AnimInstance = Cast<UHeroAnimInstance>(GetMesh()->GetAnimInstance());
+	if (IsAttacking) return;
 
-	if (AnimInstance) 
-	{
-		AnimInstance->PlayAttackMontage();
-	}
+	AnimInstance->PlayAttackMontage();
+
+	IsAttacking = true;
 }

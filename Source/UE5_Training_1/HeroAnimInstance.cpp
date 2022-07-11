@@ -39,9 +39,5 @@ void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 void UHeroAnimInstance::PlayAttackMontage()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("AttackTried"));
-	if (!Montage_IsPlaying(AttackMontage))
-	{
-		Montage_Play(AttackMontage);
-
-	}
+	Montage_Play(AttackMontage);
 }

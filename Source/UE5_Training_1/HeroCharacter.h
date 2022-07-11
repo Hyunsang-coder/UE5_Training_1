@@ -19,11 +19,16 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+public:
 	void MoveForward(float Value);
 	void Strafe(float Value);
 	void Yaw(float Value);
 	void Pitch(float Value);
 	void Attack();
+
+	UFUNCTION()
+	void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
 
 public:	
 	// Called every frame
@@ -54,6 +59,13 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
+
+	UPROPERTY(VisibleAnywhere, Category=Pawn)
+	bool IsAttacking = false;
+
+	UPROPERTY()
+	class UHeroAnimInstance* AnimInstance;
+
 
 
 };
