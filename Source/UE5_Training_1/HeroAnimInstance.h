@@ -14,6 +14,10 @@ class UE5_TRAINING_1_API UHeroAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 
+public:
+	UHeroAnimInstance();
+
+
 	virtual void NativeUpdateAnimation(float DeltaSecond) override;
 
 
@@ -23,4 +27,11 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 	bool IsFalling;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+	UAnimMontage* AttackMontage;
+
+public:
+	void PlayAttackMontage();
+
 };

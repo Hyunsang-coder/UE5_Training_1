@@ -5,8 +5,21 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/PawnMovementComponent.h"
 
+
+UHeroAnimInstance::UHeroAnimInstance()
+{
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> MT(TEXT("AnimMontage'/Game/Animation/HeroAnimMontage.HeroAnimMontage'"));
+	if (MT.Succeeded()) 
+	{
+		AttackMontage = MT.Object;
+	}
+}
+
+
 void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
+	
+
 	Super::NativeUpdateAnimation(DeltaSeconds);
 
 	auto pawn = TryGetPawnOwner();
@@ -21,6 +34,12 @@ void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		}
 	}
 
+}
 
-
+void UHeroAnimInstance::PlayAttackMontage()
+{
+	if (!Montage_IsPlaying(AttackMontage))
+	{
+		Montage_Play(AttackMontage);
+	}
 }

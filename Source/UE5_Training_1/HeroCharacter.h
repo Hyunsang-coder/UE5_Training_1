@@ -23,6 +23,7 @@ protected:
 	void Strafe(float Value);
 	void Yaw(float Value);
 	void Pitch(float Value);
+	void Attack();
 
 public:	
 	// Called every frame
@@ -34,6 +35,8 @@ public:
 		Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 		//Jump는 내장함수
+		
+		PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AHeroCharacter::Attack);
 		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AHeroCharacter::Jump);
 		PlayerInputComponent->BindAxis("MoveForward", this, &AHeroCharacter::MoveForward);
 		PlayerInputComponent->BindAxis("Strafe", this, &AHeroCharacter::Strafe);
@@ -51,7 +54,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
-
 
 
 };

@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "HeroAnimInstance.h"
 
 // Sets default values
 AHeroCharacter::AHeroCharacter()
@@ -66,4 +67,14 @@ void AHeroCharacter::Yaw(float Value)
 {
 	//Make sure to have the Yaw option is enabled on the Controller component 
 	AddControllerYawInput(Value);
+}
+
+void AHeroCharacter::Attack()
+{
+	auto AnimInstance = Cast<UHeroAnimInstance>(GetMesh()->GetAnimInstance());
+
+	if (AnimInstance) 
+	{
+		AnimInstance->PlayAttackMontage();
+	}
 }
