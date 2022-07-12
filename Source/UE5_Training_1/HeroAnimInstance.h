@@ -20,8 +20,19 @@ public:
 
 	virtual void NativeUpdateAnimation(float DeltaSecond) override;
 
+	void PlayAttackMontage();
+	void JumpToSection(int32 SectionIndex);
+	
+	FName GetAttackMontage(int32 SectionName);
+
+
+
 
 private: 
+
+	UFUNCTION()
+	void AnimNotify_AttackHit();
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Pawn, Meta = (AllowPrivateAccess = true))
 	float Speed;
 
@@ -31,7 +42,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 	UAnimMontage* AttackMontage;
 
-public:
-	void PlayAttackMontage();
+
 
 };

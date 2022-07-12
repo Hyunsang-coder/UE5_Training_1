@@ -66,6 +66,10 @@ private:
 	UPROPERTY()
 	class UHeroAnimInstance* AnimInstance;
 
+	UPROPERTY()
+	int32 AttackIndex = 0;
+
+
 
 
 };

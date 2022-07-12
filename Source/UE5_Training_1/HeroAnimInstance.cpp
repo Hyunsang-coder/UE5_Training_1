@@ -36,8 +36,24 @@ void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 }
 
+FName UHeroAnimInstance::GetAttackMontage(int32 SectionIndex)
+{
+	return FName(*FString::Printf(TEXT("Attack%d"), SectionIndex));
+}
+
+void UHeroAnimInstance::AnimNotify_AttackHit()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Hit!"));
+}
+
 void UHeroAnimInstance::PlayAttackMontage()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("AttackTried"));
 	Montage_Play(AttackMontage);
+}
+
+void UHeroAnimInstance::JumpToSection(int32 SectionIndex)
+{
+	FName Name = GetAttackMontage(SectionIndex);
+	Montage_JumpToSection(Name, AttackMontage);
 }
