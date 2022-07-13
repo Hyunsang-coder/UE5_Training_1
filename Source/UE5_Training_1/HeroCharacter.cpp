@@ -63,12 +63,16 @@ void AHeroCharacter::MoveForward(float Value)
 {
 	//Get the forward direction of the actor then add the input value 
 	AddMovementInput(GetActorForwardVector(), Value);
+
+	UpDownValue = Value;
 }
 
 void AHeroCharacter::Strafe(float Value)
 {
 	//Get the forward direction of the actor then add the input value 
 	AddMovementInput(GetActorRightVector(), Value);
+
+	LeftRightValue = Value;
 }
 
 void AHeroCharacter::Yaw(float Value)

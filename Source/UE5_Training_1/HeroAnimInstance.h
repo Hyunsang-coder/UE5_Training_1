@@ -42,6 +42,10 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 	UAnimMontage* AttackMontage;
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+	int32 Vertical;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+	int32 Horizontal;
 
 };

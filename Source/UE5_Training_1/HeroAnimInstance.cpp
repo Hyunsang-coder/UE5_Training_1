@@ -4,6 +4,7 @@
 #include "HeroAnimInstance.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PawnMovementComponent.h"
+#include "HeroCharacter.h"
 
 
 UHeroAnimInstance::UHeroAnimInstance()
@@ -27,10 +28,13 @@ void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		Speed = pawn->GetVelocity().Size();
 
-		auto Character = Cast<ACharacter>(pawn);
+		auto Character = Cast<AHeroCharacter>(pawn);
 		if (Character) 
 		{
 			IsFalling = Character->GetMovementComponent()->IsFalling();
+
+			Vertical = Character->UpDownValue;
+			Horizontal = Character->LeftRightValue;
 		}
 	}
 
