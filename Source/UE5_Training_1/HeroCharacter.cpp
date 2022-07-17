@@ -43,14 +43,14 @@ AHeroCharacter::AHeroCharacter()
 void AHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	FName WeaponSocket(TEXT("rSocket"));
+	//FName WeaponSocket(TEXT("rSocket"));
 
-	auto PickUpWeapon = GetWorld()->SpawnActor<APickUp>(FVector::ZeroVector, FRotator::ZeroRotator);
+	//auto PickUpWeapon = GetWorld()->SpawnActor<APickUp>(FVector::ZeroVector, FRotator::ZeroRotator);
 
-	if (PickUpWeapon)
+	/*if (PickUpWeapon)
 	{
 		PickUpWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
-	}
+	}*/
 }
 
 void AHeroCharacter::PostInitializeComponents()
