@@ -23,8 +23,8 @@ APickUp::APickUp()
 	PickUpWeapon->SetupAttachment(RootComponent);
 	Trigger->SetupAttachment(PickUpWeapon);  
 
-	PickUpWeapon->SetCollisionProfileName(TEXT("Collectible"));
-	Trigger->SetCollisionProfileName(TEXT("Collectible"));
+	PickUpWeapon->SetCollisionProfileName(TEXT("PickUp"));
+	Trigger->SetCollisionProfileName(TEXT("PickUp"));
 	Trigger->SetBoxExtent(FVector(30.f, 30.f, 30.f));
 }
 
