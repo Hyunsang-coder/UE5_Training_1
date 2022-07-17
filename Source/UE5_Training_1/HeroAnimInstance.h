@@ -9,6 +9,8 @@
 /**
  * 
  */
+DECLARE_MULTICAST_DELEGATE(FOnAttackHit);
+
 UCLASS()
 class UE5_TRAINING_1_API UHeroAnimInstance : public UAnimInstance
 {
@@ -47,5 +49,8 @@ private:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 	int32 Horizontal;
+
+public:
+	FOnAttackHit OnAttackHit;
 
 };

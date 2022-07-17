@@ -47,7 +47,8 @@ FName UHeroAnimInstance::GetAttackMontage(int32 SectionIndex)
 
 void UHeroAnimInstance::AnimNotify_AttackHit()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hit!"));
+	//UE_LOG(LogTemp, Warning, TEXT("Hit!"));
+	OnAttackHit.Broadcast();
 }
 
 void UHeroAnimInstance::PlayAttackMontage()

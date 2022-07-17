@@ -19,12 +19,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	virtual void PostInitializeComponents() override;
+
 public:
 	void MoveForward(float Value);
 	void Strafe(float Value);
 	void Yaw(float Value);
 	void Pitch(float Value);
 	void Attack();
+	void AttackCheck();
 
 	UFUNCTION()
 	void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);

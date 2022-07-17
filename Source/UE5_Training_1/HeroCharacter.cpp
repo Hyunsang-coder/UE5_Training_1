@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "HeroAnimInstance.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AHeroCharacter::AHeroCharacter()
@@ -42,9 +43,21 @@ void AHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AnimInstance = Cast<UHeroAnimInstance>(GetMesh()->GetAnimInstance());
-	AnimInstance->OnMontageEnded.AddDynamic(this, &AHeroCharacter::OnAttackMontageEnded);
 	
+	
+}
+
+void AHeroCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	AnimInstance = Cast<UHeroAnimInstance>(GetMesh()->GetAnimInstance());
+	if (AnimInstance) 
+	{
+		AnimInstance->OnMontageEnded.AddDynamic(this, &AHeroCharacter::OnAttackMontageEnded);
+		AnimInstance->OnAttackHit.AddUObject(this, &AHeroCharacter::AttackCheck);
+	}
+
 }
 
 // Called every frame
@@ -91,4 +104,39 @@ void AHeroCharacter::Attack()
 	AttackIndex = (AttackIndex + 1) % 3;
 
 	IsAttacking = true;
+}
+
+void AHeroCharacter::AttackCheck()
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Delegation called!"));
+
+	FHitResult HitResult;
+	FCollisionQueryParams Params(NAME_None, false, this);
+
+	float AttackRange = 100.f;
+	float AttackRadius = 50.f;
+
+	bool bResult = GetWorld()->SweepSingleByChannel(OUT HitResult,
+		GetActorLocation(),
+		GetActorLocation() + GetActorForwardVector() * AttackRange,
+		FQuat::Identity,
+		ECollisionChannel::ECC_EngineTraceChannel2,
+		FCollisionShape::MakeSphere(AttackRadius),
+		Params);
+	FVector Vec = GetActorForwardVector() * AttackRange;
+	FVector Center = GetActorLocation() + Vec * 0.5f;
+	float HalfHeight = AttackRange*0.5f + AttackRadius;
+	FQuat Rotation = FRotationMatrix::MakeFromZ(Vec).ToQuat();
+	FColor DrawColor;
+	
+	if (bResult) 
+	{
+		DrawColor = FColor::Green;
+	}
+	else 
+	{
+		DrawColor = FColor::Red;
+	}
+
+	DrawDebugCapsule(GetWorld(), Center, HalfHeight, AttackRadius, Rotation, DrawColor, false, 2.f);
 }
