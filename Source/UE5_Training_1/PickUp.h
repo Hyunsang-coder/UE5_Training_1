@@ -21,6 +21,6 @@ protected:
 
 public:
 	UPROPERTY(VisibleAnywhere)
-		UStaticMeshComponent* PickUpWeapon;
+	UStaticMeshComponent* PickUpWeapon;
 
 };

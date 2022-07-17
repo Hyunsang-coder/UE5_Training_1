@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "HeroAnimInstance.h"
 #include "DrawDebugHelpers.h"
+#include "PickUp.h"
 
 // Sets default values
 AHeroCharacter::AHeroCharacter()
@@ -42,9 +43,14 @@ AHeroCharacter::AHeroCharacter()
 void AHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	FName WeaponSocket(TEXT("rSocket"));
 
-	
-	
+	auto PickUpWeapon = GetWorld()->SpawnActor<APickUp>(FVector::ZeroVector, FRotator::ZeroRotator);
+
+	if (PickUpWeapon)
+	{
+		PickUpWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
+	}
 }
 
 void AHeroCharacter::PostInitializeComponents()
@@ -52,6 +58,9 @@ void AHeroCharacter::PostInitializeComponents()
 	Super::PostInitializeComponents();
 
 	AnimInstance = Cast<UHeroAnimInstance>(GetMesh()->GetAnimInstance());
+
+
+	// Delegate´Â PostInitializeComponents¿¡¼­...
 	if (AnimInstance) 
 	{
 		AnimInstance->OnMontageEnded.AddDynamic(this, &AHeroCharacter::OnAttackMontageEnded);
