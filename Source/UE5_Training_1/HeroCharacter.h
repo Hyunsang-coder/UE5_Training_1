@@ -19,6 +19,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+<<<<<<< Updated upstream
+=======
+	virtual void PostInitializeComponents() override;
+
+	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+
+public:
+>>>>>>> Stashed changes
 	void MoveForward(float Value);
 	void Strafe(float Value);
 	void Yaw(float Value);
@@ -52,6 +60,31 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
 
+<<<<<<< Updated upstream
+=======
+	UPROPERTY(VisibleAnywhere, Category=Pawn)
+	bool IsAttacking = false;
+
+	UPROPERTY()
+	class UHeroAnimInstance* AnimInstance;
+
+	UPROPERTY()
+	int32 AttackIndex = 0;
+
+
+public:
+	UPROPERTY()
+	int32 UpDownValue = 0;
+
+	UPROPERTY()
+	int32 LeftRightValue = 0;
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* Weapon;
+
+	UPROPERTY(VisibleAnywhere)
+	class UHeroStatComponent* Stat;
+>>>>>>> Stashed changes
 
 
 };
