@@ -79,7 +79,17 @@ public:
 	int32 UpDownValue;
 
 	UPROPERTY()
+<<<<<<< Updated upstream
 	int32 LeftRightValue;
 
+=======
+	int32 LeftRightValue = 0;
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* Weapon;
+
+	UPROPERTY(VisibleAnywhere)
+	class UHeroStatComponent* Stat
+>>>>>>> Stashed changes
 
 };
