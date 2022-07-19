@@ -8,10 +8,6 @@
 #include "HeroAnimInstance.h"
 #include "DrawDebugHelpers.h"
 #include "PickUp.h"
-<<<<<<< Updated upstream
-=======
-#include "HeroStatComponent.h"
->>>>>>> Stashed changes
 
 // Sets default values
 AHeroCharacter::AHeroCharacter()
@@ -41,11 +37,6 @@ AHeroCharacter::AHeroCharacter()
 	{
 		GetMesh()->SetSkeletalMesh(SM.Object);
 	}
-<<<<<<< Updated upstream
-=======
-
-	Stat = CreateDefaultSubobject<UHeroStatComponent> (TEXT("STAT"));
->>>>>>> Stashed changes
 }
 
 // Called when the game starts or when spawned
@@ -111,10 +102,6 @@ void AHeroCharacter::Yaw(float Value)
 	//Make sure to have the Yaw option is enabled on the Controller component 
 	AddControllerYawInput(Value);
 }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 void AHeroCharacter::Attack()
 {
@@ -161,16 +148,4 @@ void AHeroCharacter::AttackCheck()
 	}
 
 	DrawDebugCapsule(GetWorld(), Center, HalfHeight, AttackRadius, Rotation, DrawColor, false, 2.f);
-<<<<<<< Updated upstream
 }
-=======
-
-	if (bResult && HitResult.GetActor()) 
-	{
-		UE_LOG(LogTemp, Log, TEXT("Hit Actor : %s"), *HitResult.GetActor()->GetName());
-
-		FDamageEvent DamageEvent;
-		HitResult.GetActor()->TakeDamage(Stat->GetAttackDamage(), DamageEvent, GetController(), this);
-	}
-}
->>>>>>> Stashed changes
