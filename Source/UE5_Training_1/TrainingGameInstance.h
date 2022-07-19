@@ -30,5 +30,18 @@ UCLASS()
 class UE5_TRAINING_1_API UTrainingGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
+
+public:
+	UTrainingGameInstance();
+
+	virtual void Init() override;
+
+	FHeroCharacterData* GetSetData(int32 Level);
+
+private:
+	UPROPERTY()
+	class UDataTable* HeroStats;
+
 	
 };
+  
