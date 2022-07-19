@@ -19,8 +19,6 @@ UHeroAnimInstance::UHeroAnimInstance()
 
 void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
-	
-
 	Super::NativeUpdateAnimation(DeltaSeconds);
 
 	auto pawn = TryGetPawnOwner();
@@ -37,7 +35,6 @@ void UHeroAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 			Horizontal = Character->LeftRightValue;
 		}
 	}
-
 }
 
 FName UHeroAnimInstance::GetAttackMontage(int32 SectionIndex)
