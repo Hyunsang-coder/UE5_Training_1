@@ -36,7 +36,7 @@ public:
 
 	virtual void Init() override;
 
-	FHeroCharacterData* GetSetData(int32 Level);
+	FHeroCharacterData* GetStatData(int32 Level);
 
 private:
 	UPROPERTY()

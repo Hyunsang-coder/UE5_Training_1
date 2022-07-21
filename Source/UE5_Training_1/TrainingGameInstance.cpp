@@ -13,10 +13,10 @@ void UTrainingGameInstance::Init()
 {
 	Super::Init();
 
-	UE_LOG(LogTemp, Warning, TEXT("MaxHP: %d"), GetSetData(1)->MaxHP);
+	UE_LOG(LogTemp, Warning, TEXT("MaxHP: %d"), GetStatData(1)->MaxHP);
 }
 
-FHeroCharacterData* UTrainingGameInstance::GetSetData(int32 Level)
+FHeroCharacterData* UTrainingGameInstance::GetStatData(int32 Level)
 {
 	return HeroStats->FindRow<FHeroCharacterData>(*FString::FromInt(Level), TEXT(""));
 }

@@ -20,9 +20,27 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void InitializeComponent() override;
 
-		
+public:
+
+	void SetLevel(int32 Level);
+	void OnAttacked(float DamageAmount);
+
+
+	int32 GetLevel() { return Level; }
+	int32 GetMaxHP() { return HP; }
+	int32 GetAttackDamage() { return AttackDamage; }
+
+
+private:
+	
+	UPROPERTY(VisibleAnywhere, Category=Stat, Meta=(AllowPrivateAccess))
+		int32 Level;
+
+	UPROPERTY(VisibleAnywhere, Category = Stat, Meta = (AllowPrivateAccess))
+		int32 HP;
+
+	UPROPERTY(VisibleAnywhere, Category = Stat, Meta = (AllowPrivateAccess))
+		int32 AttackDamage;
 };

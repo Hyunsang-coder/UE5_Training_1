@@ -2,15 +2,19 @@
 
 
 #include "HeroStatComponent.h"
+#include "TrainingGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UHeroStatComponent::UHeroStatComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
-	// ...
+	bWantsInitializeComponent = true;
+
+	Level = 1;
 }
 
 
@@ -23,12 +27,36 @@ void UHeroStatComponent::BeginPlay()
 	
 }
 
-
-// Called every frame
-void UHeroStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UHeroStatComponent::InitializeComponent()
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	Super::InitializeComponent();
 
-	// ...
+	SetLevel(Level);
+}
+
+void UHeroStatComponent::SetLevel(int32 NewLevel)
+{
+	auto TrainingGameInstance = Cast<UTrainingGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (TrainingGameInstance) 
+	{
+		auto StatData = TrainingGameInstance->GetStatData(NewLevel);
+		if (StatData) 
+		{
+			Level = StatData->Level;
+			HP = StatData->MaxHP;
+			AttackDamage = StatData->AttackDamage;
+		}
+	}
+}
+
+void UHeroStatComponent::OnAttacked(float DamageAmount)
+{
+	HP -= DamageAmount;
+	if (HP < 0) 
+	{
+		HP = 0;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Attacked! Remaining HP: %d"), HP);
 }
 

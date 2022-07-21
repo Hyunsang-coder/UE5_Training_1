@@ -8,6 +8,7 @@
 #include "HeroAnimInstance.h"
 #include "DrawDebugHelpers.h"
 #include "PickUp.h"
+#include "HeroStatComponent.h"
 
 // Sets default values
 AHeroCharacter::AHeroCharacter()
@@ -37,6 +38,9 @@ AHeroCharacter::AHeroCharacter()
 	{
 		GetMesh()->SetSkeletalMesh(SM.Object);
 	}
+
+	Stat = CreateDefaultSubobject<UHeroStatComponent>(TEXT("STAT"));
+
 }
 
 // Called when the game starts or when spawned
@@ -68,6 +72,9 @@ void AHeroCharacter::PostInitializeComponents()
 	}
 
 }
+
+
+
 
 // Called every frame
 void AHeroCharacter::Tick(float DeltaTime)
@@ -148,4 +155,23 @@ void AHeroCharacter::AttackCheck()
 	}
 
 	DrawDebugCapsule(GetWorld(), Center, HalfHeight, AttackRadius, Rotation, DrawColor, false, 2.f);
+
+	if (bResult && HitResult.GetActor()) 
+	{
+		UE_LOG(LogTemp, Log, TEXT("Hit Actor: %s"), *HitResult.GetActor()->GetName());
+
+		FDamageEvent DamageEvent;
+		HitResult.GetActor()->TakeDamage(Stat->GetAttackDamage(), DamageEvent, GetController(), this);
+	}
+
 }
+
+
+float AHeroCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	Stat->OnAttacked(DamageAmount);
+
+	return DamageAmount;
+}
+
+

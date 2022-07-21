@@ -21,6 +21,8 @@ protected:
 
 	virtual void PostInitializeComponents() override;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+
 public:
 	void MoveForward(float Value);
 	void Strafe(float Value);
@@ -76,10 +78,13 @@ private:
 
 public:
 	UPROPERTY()
-	int32 UpDownValue;
+	int32 UpDownValue = 0;
 
 	UPROPERTY()
-	int32 LeftRightValue;
+	int32 LeftRightValue = 0;
+
+	UPROPERTY(VisibleAnywhere)
+	class UHeroStatComponent* Stat;
 
 
 };
