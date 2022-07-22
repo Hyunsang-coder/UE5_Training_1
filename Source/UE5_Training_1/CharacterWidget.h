@@ -14,4 +14,14 @@ class UE5_TRAINING_1_API UCharacterWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+	void BindHp(class UHeroStatComponent* StatComp);
+
+	void UpdateHP();
+
+private:
+	TWeakObjectPtr<class UHeroStatComponent> HeroStatComp;
+
+	UPROPERTY(meta = (BindWidget))
+	class UProgressBar* PB_HPBar;
 };

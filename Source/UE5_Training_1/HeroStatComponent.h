@@ -7,6 +7,8 @@
 #include "HeroStatComponent.generated.h"
 
 
+DECLARE_MULTICAST_DELEGATE(FOnHPChanged)
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UE5_TRAINING_1_API UHeroStatComponent : public UActorComponent
 {
@@ -26,10 +28,13 @@ public:
 
 	void SetLevel(int32 Level);
 	void OnAttacked(float DamageAmount);
+	void SetHP(int32 NewHP);
 
 
 	int32 GetLevel() { return Level; }
-	int32 GetMaxHP() { return HP; }
+	int32 GetHP() { return HP; }
+	int32 GetMaxHP() { return MaxHP; }
+	float GetHPRatio() { return HP / (float)MaxHP; }
 	int32 GetAttackDamage() { return AttackDamage; }
 
 
@@ -42,5 +47,11 @@ private:
 		int32 HP;
 
 	UPROPERTY(VisibleAnywhere, Category = Stat, Meta = (AllowPrivateAccess))
+		int32 MaxHP;
+
+	UPROPERTY(VisibleAnywhere, Category = Stat, Meta = (AllowPrivateAccess))
 		int32 AttackDamage;
+
+public:
+	FOnHPChanged OnHPChanged;
 };

@@ -43,20 +43,27 @@ void UHeroStatComponent::SetLevel(int32 NewLevel)
 		if (StatData) 
 		{
 			Level = StatData->Level;
-			HP = StatData->MaxHP;
+			SetHP(StatData->MaxHP);
+			MaxHP = StatData->MaxHP;
 			AttackDamage = StatData->AttackDamage;
 		}
 	}
 }
 
+void UHeroStatComponent::SetHP(int NewHP) 
+{
+	HP = NewHP;
+	if (HP < 0) HP = 0;
+
+	OnHPChanged.Broadcast();
+}
+
+
 void UHeroStatComponent::OnAttacked(float DamageAmount)
 {
-	HP -= DamageAmount;
-	if (HP < 0) 
-	{
-		HP = 0;
-	}
+	int32 NewHP = HP - DamageAmount;
 
-	UE_LOG(LogTemp, Warning, TEXT("Attacked! Remaining HP: %d"), HP);
+	SetHP(NewHP);
+	//UE_LOG(LogTemp, Warning, TEXT("Attacked! Remaining HP: %d"), HP);
 }
 

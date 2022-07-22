@@ -47,6 +47,7 @@ AHeroCharacter::AHeroCharacter()
 	HPBar->SetupAttachment(GetMesh());
 
 	HPBar->SetWidgetSpace(EWidgetSpace::Screen);
+	HPBar->SetRelativeLocation(FVector(0.f, 0.f, 200.f));
 
 	static ConstructorHelpers::FClassFinder<UCharacterWidget> CW(TEXT("WidgetBlueprint'/Game/UI/WBP_CharacterHPBar.WBP_CharacterHPBar_C'"));
 	if (CW.Succeeded()) 
@@ -86,6 +87,11 @@ void AHeroCharacter::PostInitializeComponents()
 	}
 
 	HPBar->InitWidget();
+	auto HPWidget = Cast<UCharacterWidget>(HPBar->GetUserWidgetObject());
+	if (HPWidget) 
+	{
+		HPWidget->BindHp(Stat);
+	}
 }
 
 
