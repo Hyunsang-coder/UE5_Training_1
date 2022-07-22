@@ -9,6 +9,8 @@
 #include "DrawDebugHelpers.h"
 #include "PickUp.h"
 #include "HeroStatComponent.h"
+#include "Components/WidgetComponent.h"
+#include "CharacterWidget.h"
 
 // Sets default values
 AHeroCharacter::AHeroCharacter()
@@ -41,6 +43,18 @@ AHeroCharacter::AHeroCharacter()
 
 	Stat = CreateDefaultSubobject<UHeroStatComponent>(TEXT("STAT"));
 
+	HPBar = CreateDefaultSubobject<UWidgetComponent>(TEXT("WIDGET"));
+	HPBar->SetupAttachment(GetMesh());
+
+	HPBar->SetWidgetSpace(EWidgetSpace::Screen);
+
+	static ConstructorHelpers::FClassFinder<UCharacterWidget> CW(TEXT("WidgetBlueprint'/Game/UI/WBP_CharacterHPBar.WBP_CharacterHPBar_C'"));
+	if (CW.Succeeded()) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Widget loading succeeded"));
+		HPBar->SetWidgetClass(CW.Class);
+		HPBar->SetDrawSize(FVector2D(200.f, 50.f));
+	}
 }
 
 // Called when the game starts or when spawned
@@ -71,6 +85,7 @@ void AHeroCharacter::PostInitializeComponents()
 		AnimInstance->OnAttackHit.AddUObject(this, &AHeroCharacter::AttackCheck);
 	}
 
+	HPBar->InitWidget();
 }
 
 

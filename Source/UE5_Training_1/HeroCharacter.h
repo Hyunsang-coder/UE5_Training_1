@@ -86,5 +86,8 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	class UHeroStatComponent* Stat;
 
+	UPROPERTY(VisibleAnywhere)
+	class UWidgetComponent* HPBar;
+
 
 };
